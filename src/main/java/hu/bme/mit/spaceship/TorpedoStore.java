@@ -1,7 +1,5 @@
 package hu.bme.mit.spaceship;
 
-import java.lang.System.Logger;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
