@@ -42,23 +42,27 @@ public class TorpedoStore {
     try {
       generator = SecureRandom.getInstanceStrong();
       double r = generator.nextDouble();
+
+      if (r >= FAILURE_RATE) {
+        // successful firing
+        this.torpedoCount -= numberOfTorpedos;
+        success = true;
+      } else {
+        // simulated failure
+        success = false;
+      }
+  
+     
+    
     } catch (NoSuchAlgorithmException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    
-
-    if (r >= FAILURE_RATE) {
-      // successful firing
-      this.torpedoCount -= numberOfTorpedos;
-      success = true;
-    } else {
-      // simulated failure
-      success = false;
-    }
-
     return success;
   }
+    
+
+    
 
   public boolean isEmpty(){
     return this.torpedoCount <= 0;
