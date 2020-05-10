@@ -30,7 +30,7 @@ public class TorpedoStore {
     }
   }
 
-  public boolean fire(int numberOfTorpedos) throws NoSuchAlgorithmException {
+  public boolean fire(int numberOfTorpedos)  {
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
       throw new IllegalArgumentException("numberOfTorpedos");
     }
@@ -38,8 +38,15 @@ public class TorpedoStore {
     boolean success = false;
 
     // simulate random overheating of the launcher bay which prevents firing
-    Random generator = SecureRandom.getInstanceStrong();
-    double r = generator.nextDouble();
+    Random generator;
+    try {
+      generator = SecureRandom.getInstanceStrong();
+      double r = generator.nextDouble();
+    } catch (NoSuchAlgorithmException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
 
     if (r >= FAILURE_RATE) {
       // successful firing
